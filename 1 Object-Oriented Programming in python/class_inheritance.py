@@ -18,7 +18,7 @@ class Printer(Device):
         self.remaining_pages = capacity
 
     def __str__(self):
-        return f"{supper().__str__()} ({self.remaining_pages} pages remaining)"
+        return f"{super().__str__()} ({self.remaining_pages} pages remaining)"
 
     def print(self, pages):
         if not self.connected:
