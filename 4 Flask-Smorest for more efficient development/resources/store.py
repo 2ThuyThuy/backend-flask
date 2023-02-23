@@ -30,12 +30,12 @@ class Store(MethodView):
 @blp.route("/store")
 class StoreList(MethodView):
     @blp.response(200, StoreSchema(many=True))
-    def get(cls):
+    def get(self):
         return stores.values()
 
     @blp.arguments(StoreSchema)
     @blp.response(201, StoreSchema)
-    def post(cls, store_data):
+    def post(self, store_data):
         for store in stores.values():
             if store_data["name"] == store["name"]:
                 abort(400, message=f"Store already exists.")
@@ -44,4 +44,4 @@ class StoreList(MethodView):
         store = {**store_data, "id": store_id}
         stores[store_id] = store
 
-        return
+        return store
