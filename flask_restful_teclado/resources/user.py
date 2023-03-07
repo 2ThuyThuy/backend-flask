@@ -4,13 +4,12 @@ from flask_jwt_extended import (
     create_refresh_token,
     get_jwt_identity,
     get_jwt,
-    jwt_required
+    jwt_required,
 )
-
 from passlib.hash import pbkdf2_sha256
 
-from flask_restful_api.models import UserModel
-from flask_restful_api.blocklist import BLOCKLIST
+from flask_restful_teclado.models import UserModel
+from flask_restful_teclado.blocklist import BLOCKLIST
 
 _user_parser = reqparse.RequestParser()
 _user_parser.add_argument(
@@ -59,6 +58,13 @@ class UserLogout(Resource):
 
 
 class User(Resource):
+    """
+    This resource can be useful when testing our Flask app.
+    We may not want to expose it to public users, but for the
+    sake of demonstration in this course, it can be useful
+    when we are manipulating data regarding the users.
+    """
+
     @classmethod
     def get(cls, user_id):
         user = UserModel.find_by_id(user_id)
